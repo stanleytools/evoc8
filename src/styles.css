@@ -6,6 +6,7 @@
   --border: #dfe3e8;
   --accent: #2f5bd8;
   --accent-soft: #e8eefc;
+  --pass: #1a7f37;
   --danger: #b3261e;
   --danger-soft: #fdecea;
   font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
@@ -353,9 +354,98 @@ summary {
   word-break: break-word;
 }
 
+.small {
+  font-size: 0.85em;
+}
+
+.status-wrap {
+  display: inline-flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.status {
+  display: inline-block;
+  padding: 0.15rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.status.pass {
+  background: var(--pass);
+  color: #fff;
+}
+
+.status.todo,
+.status.checking {
+  background: #eceff3;
+  color: var(--muted);
+}
+
+.status.fail {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.status.large {
+  padding: 0.3rem 1.1rem;
+  font-size: 1.25rem;
+  letter-spacing: 0.03em;
+}
+
+.ticket-head {
+  margin-top: 0;
+  margin-bottom: 0.3rem;
+}
+
+.ticket-head .eyebrow {
+  margin: 0;
+}
+
+.sidebar a.passed .number {
+  color: var(--pass);
+  font-weight: 700;
+}
+
+.sidebar .tick {
+  margin-left: auto;
+  color: var(--pass);
+  font-weight: 700;
+}
+
+.sidebar .results-link {
+  margin-top: 0.5rem;
+  border-top: 1px solid var(--border);
+  border-radius: 0 0 6px 6px;
+  font-weight: 600;
+}
+
+.test-code {
+  margin: 1rem 0 0 0.6rem;
+}
+
+.results h2 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  margin: 0.4rem 0 0.6rem;
+}
+
+.results-count {
+  font-size: 1.05rem;
+}
+
+.results table {
+  margin: 0.5rem 0 0.25rem;
+}
+
 @media (max-width: 720px) {
   .layout {
     grid-template-columns: minmax(0, 1fr);
+    align-content: start;
   }
 
   .sidebar {
@@ -392,6 +482,26 @@ summary {
   .sidebar .number {
     width: auto;
     color: inherit;
+  }
+
+  .sidebar a {
+    gap: 0.25rem;
+  }
+
+  .sidebar a.passed {
+    border-color: var(--pass);
+    color: var(--pass);
+  }
+
+  .sidebar .results-link {
+    margin-top: 0;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+  }
+
+  .sidebar .test-code {
+    display: block;
+    margin: 0 0 0 auto;
   }
 
   .ticket dl,

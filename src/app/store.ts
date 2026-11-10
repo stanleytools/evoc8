@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, type Middleware } from '@reduxjs/toolkit';
 import { actionLogMiddleware } from './actionLog';
 import quickCartReducer from '../exercises/01-add-to-cart/quickCartSlice';
 import cartReducer from '../exercises/02-cart/cartSlice';
@@ -7,7 +7,9 @@ import ordersReducer from '../exercises/04-orders/ordersSlice';
 import inventoryReducer from '../exercises/05-inventory-feed/inventorySlice';
 import searchReducer from '../exercises/06-search/searchSlice';
 
-export function makeStore() {
+export function makeStore(options: { actionLog?: boolean } = {}) {
+  const extraMiddleware: Middleware[] = options.actionLog === false ? [] : [actionLogMiddleware];
+
   return configureStore({
     reducer: {
       quickCart: quickCartReducer,
@@ -17,7 +19,7 @@ export function makeStore() {
       inventory: inventoryReducer,
       search: searchReducer,
     },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(actionLogMiddleware),
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(extraMiddleware),
   });
 }
 
