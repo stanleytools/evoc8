@@ -1,0 +1,27 @@
+{
+  "name": "Storefront exercise",
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:22",
+  "updateContentCommand": "npm ci",
+  "postAttachCommand": "npm run dev",
+  "forwardPorts": [5173],
+  "portsAttributes": {
+    "5173": {
+      "label": "Storefront",
+      "onAutoForward": "openPreview"
+    }
+  },
+  "customizations": {
+    "codespaces": {
+      "openFiles": ["README.md"]
+    },
+    "vscode": {
+      "settings": {
+        "github.copilot.enable": { "*": false },
+        "chat.disableAIFeatures": true,
+        "editor.inlineSuggest.enabled": false,
+        "workbench.startupEditor": "none",
+        "editor.formatOnSave": false
+      }
+    }
+  }
+}

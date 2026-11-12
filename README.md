@@ -5,12 +5,14 @@ Each one is written up as a bug ticket inside the running app.
 
 ## How this works
 
-1. The app starts on its own. Wait for the preview pane to load. In StackBlitz the
-   preview is on the right and the code editor is on the left.
-2. Pick an exercise with the numbered buttons at the top of the preview. Start with number 1.
-3. Read the ticket, reproduce the bug in the preview, then find and fix it in the code.
-4. The preview reloads when you save. Confirm the expected behavior before moving on.
-5. Each exercise shows a green "Pass" badge once the feature behaves the way its ticket
+1. The app starts on its own. After about a minute a "Storefront" preview tab opens
+   next to the code. If it does not, open the Ports panel at the bottom and click the
+   globe icon next to "Storefront".
+2. Drag the preview tab to the right side so the code and the shop sit side by side.
+3. Pick an exercise with the numbered buttons at the top of the preview. Start with number 1.
+4. Read the ticket, reproduce the bug in the preview, then find and fix it in the code.
+5. The preview reloads when you save. Confirm the expected behavior before moving on.
+6. Each exercise shows a green "Pass" badge once the feature behaves the way its ticket
    describes. The "Results" button shows all six at once.
 
 ## Ground rules
