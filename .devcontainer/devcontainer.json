@@ -1,0 +1,23 @@
+{
+  "name": "Trust ledger exercise",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "workspace",
+  "workspaceFolder": "/workspace",
+  "updateContentCommand": "npm ci",
+  "postAttachCommand": "npm run watch",
+  "customizations": {
+    "codespaces": {
+      "openFiles": ["README.md"]
+    },
+    "vscode": {
+      "settings": {
+        "github.copilot.enable": { "*": false },
+        "chat.disableAIFeatures": true,
+        "editor.inlineSuggest.enabled": false,
+        "workbench.startupEditor": "none",
+        "editor.formatOnSave": false,
+        "files.autoSave": "off"
+      }
+    }
+  }
+}

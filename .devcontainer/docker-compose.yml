@@ -1,0 +1,20 @@
+services:
+  workspace:
+    image: mcr.microsoft.com/devcontainers/javascript-node:22
+    volumes:
+      - ..:/workspace:cached
+    command: sleep infinity
+    depends_on:
+      - sqlserver
+      - mongo
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: "Express"
+      # Local, throwaway development database. Not a real credential.
+      MSSQL_SA_PASSWORD: "Ledger-Dev-2026"
+
+  mongo:
+    image: mongo:7.0
