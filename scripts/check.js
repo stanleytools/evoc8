@@ -5,6 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const { ROOT, config, connectSql, connectMongo } = require('./lib/db');
 const { runAllChecks } = require('./lib/run');
+const { becomeTheOnlyWatcher, stopBeingTheWatcher, release } = require('./lib/lock');
 
 const args = process.argv.slice(2);
 const WATCH = args.includes('--watch');
@@ -60,6 +61,16 @@ async function main() {
     await mongo.close();
     return;
   }
+
+  await becomeTheOnlyWatcher();
+  const stop = (message) => {
+    stopBeingTheWatcher();
+    release();
+    if (message) console.log(message);
+    process.exit(0);
+  };
+  process.on('SIGTERM', () => stop('\n The results table is now running in another terminal.'));
+  process.on('SIGINT', () => stop(''));
 
   let running = false;
   let queued = false;

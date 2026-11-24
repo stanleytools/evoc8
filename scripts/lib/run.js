@@ -4,6 +4,7 @@ const path = require('path');
 const { ROOT, config, runSqlText, resetData, describeSqlError } = require('./db');
 const exercises = require('./exercises');
 const checks = require('./checks');
+const { withDatabaseLock } = require('./lock');
 
 /** Loads the candidate's current SQL files into the database. Returns load errors by ticket id. */
 async function applySqlExercises(pool, only) {
@@ -21,7 +22,11 @@ async function applySqlExercises(pool, only) {
   return errors;
 }
 
-async function runAllChecks(pool, mongo) {
+function runAllChecks(pool, mongo) {
+  return withDatabaseLock(() => runAllChecksNow(pool, mongo));
+}
+
+async function runAllChecksNow(pool, mongo) {
   const db = mongo.db(config.mongoDb);
   await resetData(pool, mongo);
   const loadErrors = await applySqlExercises(pool);

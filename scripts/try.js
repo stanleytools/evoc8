@@ -6,6 +6,7 @@ const path = require('path');
 const { ROOT, config, connectSql, connectMongo, resetData, loadFresh, describeSqlError } = require('./lib/db');
 const { applySqlExercises } = require('./lib/run');
 const exercises = require('./lib/exercises');
+const { withDatabaseLock } = require('./lib/lock');
 
 function splitBatches(text) {
   return text
@@ -32,6 +33,13 @@ async function main() {
 
   const pool = await connectSql();
   const mongo = await connectMongo();
+  await withDatabaseLock(() => reproduce(exercise, pool, mongo));
+
+  await pool.close();
+  await mongo.close();
+}
+
+async function reproduce(exercise, pool, mongo) {
   await resetData(pool, mongo);
   const loadErrors = await applySqlExercises(pool);
 
@@ -58,9 +66,6 @@ async function main() {
       console.log(`ERROR ${error.message}\n`);
     }
   }
-
-  await pool.close();
-  await mongo.close();
 }
 
 main().catch((error) => {
